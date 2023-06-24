@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "JVA8fyOS2hYjo2gFXOIsr6/7QqVdtqY7ssBqigiPKJYKVg8RIqgc4o6Y1K2wD8J1Vj27T1F1GLk1W0b0xwdxaQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\VASU\\Documents\\github\\MoodMate\\MoodMateServer\\MoodMateServer\\MoodMateServer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\VASU\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\VASU\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\VASU\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\VASU\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\VASU\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\VASU\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
