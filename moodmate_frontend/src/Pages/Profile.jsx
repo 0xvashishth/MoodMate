@@ -9,8 +9,9 @@ const Profile = ({ joinRoom }) => {
   const [gif, setGif] = useState(0);
   const [mood, setMood] = useState(0);
   const [user, setUser] = useState();
-  const [room, setRoom] = useState();
-  const { setSenderMood, setYourMood, setYourName } = useAppContext();
+  const [isDisable, setIsDisable] = useState(false);
+  const { setSenderMood, setYourMood, setYourName, setIsEnable, isEnable } =
+    useAppContext();
   var toastId;
   return (
     <div className="bg-cyan-100 h-screen w-screen p-5 flex justify-around text-center flex-col">
@@ -27,14 +28,17 @@ const Profile = ({ joinRoom }) => {
           className={`text-lg bg-blue-400 text-white border-black p-1 rounded-lg h-10 w-20`}
           onClick={(e) => {
             e.preventDefault();
-            if (user != null) {
-              console.log(user, moodVal[mood], moodVal[gif]);
-              setYourMood(gif);
-              setSenderMood(mood);
-              setYourName(user);
-              joinRoom(user, moodVal[mood], moodVal[gif]);
-            } else {
-              toastId = toast.error("Please Enter your nick name 😏");
+            if (isEnable) {
+              setIsEnable(false);
+              if (user != null) {
+                console.log(user, moodVal[mood], moodVal[gif]);
+                setYourMood(gif);
+                setSenderMood(mood);
+                setYourName(user);
+                joinRoom(user, moodVal[mood], moodVal[gif]);
+              } else {
+                toastId = toast.error("Please Enter your nick name 😏");
+              }
             }
           }}
         >
