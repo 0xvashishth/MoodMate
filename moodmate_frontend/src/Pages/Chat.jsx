@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { BiSend } from "react-icons/bi";
 import { useAppContext } from "../Context/appContext";
 import React from "react";
+import { toast } from "react-hot-toast";
 
 const Chat = ({ sendMessage, messages, users, closeConnection }) => {
   const [message, setMessage] = useState("");
@@ -16,10 +17,25 @@ const Chat = ({ sendMessage, messages, users, closeConnection }) => {
     setSenderMood,
     setYourMood,
     setYourName,
+    toastIdUsers,
+    setToastIdUsers,
   } = useAppContext();
   useEffect(() => {
     scr.current.scrollIntoView();
   }, [messages]);
+  useEffect(() => {
+    if (users?.length == 1) {
+      setToastIdUsers(toast.loading("Finding Your MoodMate 😉"));
+    }
+    if (users?.length == 2) {
+      toast.success(
+        `Your MoodMate Found ❤️‍🔥 \nYou're chatting with ${
+          users[0] == yourName ? users[1] : users[0]
+        }🤩`,
+        { id: toastIdUsers }
+      );
+    }
+  }, [users]);
   return (
     <div className="h-screen bg-cyan-100 flex justify-around text-center flex-col relative">
       <div className="leave-room text-lg bg-blue-400 text-white border-black rounded-lg h-10 w-20 top-2 right-3 md:right-10 absolute p-[0.35rem]">
@@ -29,6 +45,7 @@ const Chat = ({ sendMessage, messages, users, closeConnection }) => {
             setYourMood("");
             setSenderMood("");
             setYourName("");
+            toast.success("You Left The Room 🥲", { id: toastIdUsers });
             closeConnection();
           }}
         >
@@ -71,11 +88,13 @@ const Chat = ({ sendMessage, messages, users, closeConnection }) => {
             className="bg-blue-400 rounded-full h-12 w-12"
             onClick={(e) => {
               e.preventDefault();
-              sendMessage(message);
+              if (message.length) {
+                sendMessage(message);
+              }
               setMessage("");
             }}
           >
-          <BiSend className="m-auto block w-7 h-7" color="white" />
+            <BiSend className="m-auto block w-7 h-7" color="white" />
           </button>
         </div>
       </div>

@@ -6,13 +6,14 @@ import { useState } from "react";
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 // require('dotenv').config()
 import toast, { Toaster } from "react-hot-toast";
+import { useAppContext } from "./Context/appContext";
 
 function App() {
   var toastId;
   const [connection, setConnection] = useState();
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
-
+  const { setIsEnable } = useAppContext();
   const joinRoom = async (user, UserWant, UserIs) => {
     toastId = toast.loading("Please wait 😉");
     try {
@@ -56,6 +57,7 @@ function App() {
       });
       console.log(e);
     }
+    setIsEnable(true);
   };
 
   const sendMessage = async (message) => {

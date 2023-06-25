@@ -6,6 +6,8 @@ const AppProvider = ({ children }) => {
   const [yourMood, setYourMood] = useState("");
   const [yourName, setYourName] = useState("");
   const [senderMood, setSenderMood] = useState("");
+  const [toastIdUsers, setToastIdUsers] = useState("");
+  const [isEnable, setIsEnable] = useState(true);
 
   return (
     <AppContext.Provider
@@ -16,6 +18,10 @@ const AppProvider = ({ children }) => {
         setSenderMood,
         setYourMood,
         setYourName,
+        toastIdUsers,
+        setToastIdUsers,
+        isEnable,
+        setIsEnable,
       }}
     >
       {children}
