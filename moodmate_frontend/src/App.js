@@ -9,10 +9,12 @@ function App() {
   const [connection, setConnection] = useState();
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
+  require('dotenv').config()
+
   const joinRoom = async (user, UserWant, UserIs) => {
     try {
       const connection = new HubConnectionBuilder()
-        .withUrl("https://localhost:44357/chat")
+        .withUrl(process.env['REACT_APP_BASE_URL'])
         .configureLogging(LogLevel.Information)
         .build();
 
