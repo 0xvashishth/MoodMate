@@ -7,6 +7,7 @@ const AppProvider = ({ children }) => {
   const [yourName, setYourName] = useState("");
   const [senderMood, setSenderMood] = useState("");
   const [toastIdUsers, setToastIdUsers] = useState("");
+  const [privacy, setPrivacy] = useState(true);
   const [isEnable, setIsEnable] = useState(true);
 
   return (
@@ -22,6 +23,8 @@ const AppProvider = ({ children }) => {
         setToastIdUsers,
         isEnable,
         setIsEnable,
+        privacy,
+        setPrivacy,
       }}
     >
       {children}

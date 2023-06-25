@@ -14,7 +14,7 @@ function App() {
   const [connection, setConnection] = useState();
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
-  const { setIsEnable } = useAppContext();
+  const { setIsEnable, privacy } = useAppContext();
   const joinRoom = async (user, UserWant, UserIs) => {
     toastId = toast.loading("Please wait 😉");
     try {
@@ -83,7 +83,7 @@ function App() {
 
   return (
     <div className="App">
-      <Privacy/>
+      {privacy && <Privacy />}
       <Toaster position="top-center" reverseOrder={false} />
       {!connection ? (
         <Profile joinRoom={joinRoom} />
