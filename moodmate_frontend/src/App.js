@@ -4,12 +4,14 @@ import Profile from "./Pages/Profile";
 import Chat from "./Pages/Chat";
 import { useState } from "react";
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
+// require('dotenv').config()
+
 
 function App() {
   const [connection, setConnection] = useState();
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
-  require('dotenv').config()
+  
 
   const joinRoom = async (user, UserWant, UserIs) => {
     try {
