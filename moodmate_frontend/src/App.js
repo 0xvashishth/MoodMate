@@ -14,7 +14,7 @@ function App() {
   const [connection, setConnection] = useState();
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
-  const { setIsEnable, privacy } = useAppContext();
+  const { setIsEnable, privacy, isSent, setIsSent } = useAppContext();
   const joinRoom = async (user, UserWant, UserIs) => {
     toastId = toast.loading("Please wait 😉");
     try {
@@ -36,7 +36,7 @@ function App() {
         setMessages([]);
         setUsers([]);
       });
-      toast.loading("Crunching your moodMate 😋", {
+      toast.loading("Crunching your MoodMate 😋", {
         id: toastId,
       });
       await connection.start();
@@ -48,7 +48,7 @@ function App() {
         UserWant,
         connectionId: "567232",
       });
-      toast.success("Room Is Created 😁", {
+      toast.success("Joined The Room 😁", {
         id: toastId,
       });
       setConnection(connection);
@@ -62,14 +62,18 @@ function App() {
   };
 
   const sendMessage = async (message) => {
-    try {
-      toastId = toast.loading("Sending Your Message..");
-      await connection.invoke("SendMessage", message);
-      toast.success("Sent", {
-        id: toastId,
-      });
-    } catch (e) {
-      console.log(e);
+    if (isSent) {
+      setIsSent(false);
+      try {
+        toastId = toast.loading("Sending Your Message..");
+        await connection.invoke("SendMessage", message);
+        toast.success("Sent", {
+          id: toastId,
+        });
+      } catch (e) {
+        console.log(e);
+      }
+      setIsSent(true);
     }
   };
 

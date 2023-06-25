@@ -9,6 +9,7 @@ const AppProvider = ({ children }) => {
   const [toastIdUsers, setToastIdUsers] = useState("");
   const [privacy, setPrivacy] = useState(true);
   const [isEnable, setIsEnable] = useState(true);
+  const [isSent, setIsSent] = useState(true);
 
   return (
     <AppContext.Provider
@@ -25,6 +26,8 @@ const AppProvider = ({ children }) => {
         setIsEnable,
         privacy,
         setPrivacy,
+        isSent,
+        setIsSent,
       }}
     >
       {children}
