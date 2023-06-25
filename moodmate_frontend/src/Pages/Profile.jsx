@@ -15,7 +15,7 @@ const Profile = ({ joinRoom }) => {
     useAppContext();
   var toastId;
   return (
-    <div className="bg-cyan-100 h-screen w-screen p-5 flex justify-around text-center flex-col">
+    <div className="-mt-4 min-h-screen p-5 flex justify-center text-center flex-col gap-14 md:gap-16">
       <div>
         <img src={logo} className="m-auto h-20 w-auto" />
       </div>
