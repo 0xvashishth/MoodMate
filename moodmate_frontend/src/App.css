@@ -28,6 +28,12 @@
   overflow-wrap: break-word;
   white-space: normal;
 }
+.custom-truncate2 {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-all;
+  hyphens: auto;
+}
 
 ::-webkit-scrollbar {
   width: 2px;
@@ -38,6 +44,10 @@
 }
 ::-webkit-scrollbar-track {
   background-color: transparent;
+}
+
+.noScroll::-webkit-scrollbar {
+  display: none;
 }
 
 .App-link {

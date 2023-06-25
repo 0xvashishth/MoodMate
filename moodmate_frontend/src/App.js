@@ -12,13 +12,12 @@ function App() {
   const [connection, setConnection] = useState();
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
-  
 
   const joinRoom = async (user, UserWant, UserIs) => {
     toastId = toast.loading("Please wait 😉");
     try {
       const connection = new HubConnectionBuilder()
-        .withUrl(process.env['REACT_APP_BASE_URL'])
+        .withUrl(process.env["REACT_APP_BASE_URL"])
         .configureLogging(LogLevel.Information)
         .build();
 

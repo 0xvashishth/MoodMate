@@ -24,11 +24,13 @@ const Profile = ({ joinRoom }) => {
           className={`text-lg bg-blue-400 text-white border-black p-1 rounded-lg h-10 w-20`}
           onClick={(e) => {
             e.preventDefault();
-            console.log(user, moodVal[mood], moodVal[gif]);
-            localStorage.setItem("yourMood", gif);
-            localStorage.setItem("senderMood", mood);
-            localStorage.setItem("yourName", user);
-            joinRoom(user, moodVal[mood], moodVal[gif]);
+            if (user != null) {
+              console.log(user, moodVal[mood], moodVal[gif]);
+              localStorage.setItem("yourMood", gif);
+              localStorage.setItem("senderMood", mood);
+              localStorage.setItem("yourName", user);
+              joinRoom(user, moodVal[mood], moodVal[gif]);
+            }
           }}
         >
           Enter
