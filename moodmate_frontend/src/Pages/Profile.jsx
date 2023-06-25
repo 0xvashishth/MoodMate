@@ -3,9 +3,12 @@ import { gifObj, moodVal } from "../utils/Dummy";
 
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
-const Profile = () => {
+const Profile = ({ joinRoom }) => {
   const [gif, setGif] = useState(0);
   const [mood, setMood] = useState(0);
+  const [user, setUser] = useState();
+  const [room, setRoom] = useState();
+
   return (
     <div className="bg-cyan-100 h-screen w-screen p-5 flex justify-around text-center flex-col">
       <div>
@@ -15,9 +18,18 @@ const Profile = () => {
         <input
           className="lg:w-1/4 w-2/3 rounded-lg outline-none h-10 p-4"
           placeholder="Enter Your Nickname"
+          onChange={(e) => setUser(e.target.value)}
         />
         <button
           className={`text-lg bg-blue-400 text-white border-black p-1 rounded-lg h-10 w-20`}
+          onClick={(e) => {
+            e.preventDefault();
+            console.log(user, moodVal[mood], moodVal[gif]);
+            localStorage.setItem("yourMood", gif);
+            localStorage.setItem("senderMood", mood);
+            localStorage.setItem("yourName", user);
+            joinRoom(user, moodVal[mood], moodVal[gif]);
+          }}
         >
           Enter
         </button>
