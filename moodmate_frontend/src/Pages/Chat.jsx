@@ -32,7 +32,7 @@ const Chat = ({ sendMessage, messages, users, closeConnection }) => {
         <iframe
           src="https://vashisht.co/dyno/"
           title="Dyno App"
-          className="fixed bottom-28 w-screen noScroll h-60"
+          className="fixed bottom-28 w-screen noScroll h-60 z-50"
         ></iframe>
       );
       setToastIdUsers(toast.loading("Finding Your MoodMate 😉"));
@@ -92,7 +92,7 @@ const Chat = ({ sendMessage, messages, users, closeConnection }) => {
           <div users={users}>{console.log(users)}</div>
         </div>
         <div className="mt-12">
-          <div className="h-[80vh] overflow-scroll my-6 pb-6 flex flex-col gap-1">
+          <div className="h-[80vh] overflow-scroll my-6 pb-6 flex flex-col gap-1 z-10">
             {messages.map((m, index) =>
               yourName == m.user ? (
                 <SendingChat
