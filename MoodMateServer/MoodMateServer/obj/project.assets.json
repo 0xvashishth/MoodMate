@@ -703,24 +703,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\VASU\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\pmdha\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\VASU\\Documents\\github\\MoodMate\\MoodMateServer\\MoodMateServer\\MoodMateServer.csproj",
+      "projectUniqueName": "D:\\Web-Dev\\moodmate\\MoodMateServer\\MoodMateServer\\MoodMateServer.csproj",
       "projectName": "MoodMateServer",
-      "projectPath": "C:\\Users\\VASU\\Documents\\github\\MoodMate\\MoodMateServer\\MoodMateServer\\MoodMateServer.csproj",
-      "packagesPath": "C:\\Users\\VASU\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\VASU\\Documents\\github\\MoodMate\\MoodMateServer\\MoodMateServer\\obj\\",
+      "projectPath": "D:\\Web-Dev\\moodmate\\MoodMateServer\\MoodMateServer\\MoodMateServer.csproj",
+      "packagesPath": "C:\\Users\\pmdha\\.nuget\\packages\\",
+      "outputPath": "D:\\Web-Dev\\moodmate\\MoodMateServer\\MoodMateServer\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\VASU\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\pmdha\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -774,7 +769,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
