@@ -7,6 +7,7 @@ import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 // require('dotenv').config()
 import toast, { Toaster } from "react-hot-toast";
 import { useAppContext } from "./Context/appContext";
+import Privacy from "./Components/Privacy";
 
 function App() {
   var toastId;
@@ -82,6 +83,7 @@ function App() {
 
   return (
     <div className="App">
+      <Privacy/>
       <Toaster position="top-center" reverseOrder={false} />
       {!connection ? (
         <Profile joinRoom={joinRoom} />
