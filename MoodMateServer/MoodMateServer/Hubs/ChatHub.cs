@@ -51,17 +51,13 @@ namespace MoodMateServer.Hubs
             string room = "Default";
             if(count > 0)
             {
-                foreach(var user in users)
-                {
-                    user.IsAvailable = false;
-                    userConnection.IsAvailable = false;
-                    userConnection.Room = user.Room;
-                    room = user.Room;
-                    _connections[user.ConnectionId] = user;
-                    await Clients.Group(userConnection.Room).SendAsync("ReceiveMessage", _botUser, $"{userConnection.User} has joined");
-                    break;
-                }
-
+                UserConnection user = _connections.FirstOrDefault().Value;
+                user.IsAvailable = false;
+                userConnection.IsAvailable = false;
+                userConnection.Room = user.Room;
+                room = user.Room;
+                _connections[user.ConnectionId] = user;
+                await Clients.Group(userConnection.Room).SendAsync("ReceiveMessage", _botUser, $"{userConnection.User} has joined");
             }
             else
             {
@@ -80,6 +76,27 @@ namespace MoodMateServer.Hubs
             await SendUsersConnected(room);
             // sending details of room name incase of any disputes
             await SendRoomName(room);
+        }
+
+        public async Task CheckAvailable(UserConnection userConnection)
+        {
+            var users = _connections.Values
+                .Where(c => (c.IsAvailable == true) && (c.UserIs == userConnection.UserWant) && (c.UserWant == userConnection.UserIs))
+                .Select(c => c);
+            if(users.Count() > 0)
+            {
+                UserConnection user = _connections.FirstOrDefault().Value;
+                user.IsAvailable = false;
+                userConnection.IsAvailable = false;
+                userConnection.Room = user.Room;
+                _connections[user.ConnectionId] = user;
+                await Clients.Group(userConnection.Room).SendAsync("ReceiveMessage", _botUser, $"{userConnection.User} has joined");
+                await Groups.AddToGroupAsync(Context.ConnectionId, user.Room);
+                userConnection.ConnectionId = Context.ConnectionId;
+                _connections[Context.ConnectionId] = userConnection;
+                await SendUsersConnected(user.Room);
+                await SendRoomName(user.Room);
+            }
         }
 
         public async Task SendMessage(string message)
