@@ -11,15 +11,16 @@ namespace MoodMateServer.Controllers
     {
 
         [HttpGet]
-        public string Get()
+        public Task<int> Get()
         {
-            int TotalConnections = 1;
-            return "value";
+            Task<int> TotalConnections = GetConnectedUsersCount();
+            return TotalConnections;
         }
 
         private async Task<int> GetConnectedUsersCount()
         {
             var connection = new HubConnectionBuilder()
+                .WithUrl("https://moodmateserver20230625045615.azurewebsites.net/chat")
                 .Build();
 
             await connection.StartAsync();

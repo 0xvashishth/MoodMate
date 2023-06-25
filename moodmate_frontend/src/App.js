@@ -77,6 +77,14 @@ function App() {
     }
   };
 
+  const FindConnection = async () => {
+    try {
+      await connection.invoke("CheckAvailable");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const closeConnection = async () => {
     try {
       await connection.stop();
@@ -97,6 +105,7 @@ function App() {
           messages={messages}
           users={users}
           closeConnection={closeConnection}
+          FindConnection={FindConnection}
         />
       )}
     </div>

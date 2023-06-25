@@ -51,13 +51,14 @@ namespace MoodMateServer.Hubs
             string room = "Default";
             if(count > 0)
             {
-                UserConnection user = _connections.FirstOrDefault().Value;
+                UserConnection user = users.FirstOrDefault();
                 user.IsAvailable = false;
                 userConnection.IsAvailable = false;
                 userConnection.Room = user.Room;
                 room = user.Room;
                 _connections[user.ConnectionId] = user;
-                await Clients.Group(userConnection.Room).SendAsync("ReceiveMessage", _botUser, $"{userConnection.User} has joined");
+                await Groups.AddToGroupAsync(Context.ConnectionId, room);
+                await Clients.Group(userConnection.Room).SendAsync("ReceiveMessage", _botUser, $"Wow, {userConnection.User} has joined 🎉\n Same mood, same room. 😉");
             }
             else
             {
@@ -65,9 +66,8 @@ namespace MoodMateServer.Hubs
                 userConnection.Room = randomString;
                 userConnection.IsAvailable = true;
                 room = randomString;
+                await Groups.AddToGroupAsync(Context.ConnectionId, room);
             }
-
-            await Groups.AddToGroupAsync(Context.ConnectionId, room);
 
             userConnection.ConnectionId = Context.ConnectionId;
             _connections[Context.ConnectionId] = userConnection;
@@ -78,21 +78,23 @@ namespace MoodMateServer.Hubs
             await SendRoomName(room);
         }
 
-        public async Task CheckAvailable(UserConnection userConnection)
+        public async Task CheckAvailable()
         {
+            UserConnection userConnection = _connections[Context.ConnectionId];
+
             var users = _connections.Values
-                .Where(c => (c.IsAvailable == true) && (c.UserIs == userConnection.UserWant) && (c.UserWant == userConnection.UserIs))
+                .Where(c => (c.IsAvailable == true) && (c.ConnectionId != userConnection.ConnectionId) && (c.UserIs == userConnection.UserWant) && (c.UserWant == userConnection.UserIs))
                 .Select(c => c);
+
             if(users.Count() > 0)
             {
-                UserConnection user = _connections.FirstOrDefault().Value;
+                UserConnection user = users.FirstOrDefault();
                 user.IsAvailable = false;
                 userConnection.IsAvailable = false;
                 userConnection.Room = user.Room;
                 _connections[user.ConnectionId] = user;
-                await Clients.Group(userConnection.Room).SendAsync("ReceiveMessage", _botUser, $"{userConnection.User} has joined");
                 await Groups.AddToGroupAsync(Context.ConnectionId, user.Room);
-                userConnection.ConnectionId = Context.ConnectionId;
+                await Clients.Group(userConnection.Room).SendAsync("ReceiveMessage", _botUser, $"Wow, {userConnection.User} has joined 🎉\n Same mood, same room. 😉");
                 _connections[Context.ConnectionId] = userConnection;
                 await SendUsersConnected(user.Room);
                 await SendRoomName(user.Room);
@@ -132,5 +134,9 @@ namespace MoodMateServer.Hubs
             return randomString;
         }
 
+        public int SendAllCurrentUsers()
+        {
+            return _connections.Count;
+        }
     }
 }
