@@ -10,17 +10,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSignalR();
-var configuration = new ConfigurationBuilder()
+/*var configuration = new ConfigurationBuilder()
     .SetBasePath(builder.Environment.ContentRootPath)
     .AddJsonFile("appsettings.json")
-    .Build();
+    .Build();*/
 builder.Services.AddSingleton<IDictionary<string, UserConnection>>(opts => new Dictionary<string, UserConnection>());
-builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
+/*builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
 {
     builder.AllowAnyMethod().AllowAnyHeader()
-    .WithOrigins(configuration["clientUrl"])
+    .WithOrigins("http://localhost:3000/")
     .AllowCredentials();
-}));
+}));*/
 
 var app = builder.Build();
 
@@ -31,7 +31,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("CorsPolicy");
+app.UseCors(x => x
+          .AllowAnyMethod()
+          .AllowAnyHeader()
+          .SetIsOriginAllowed(origin => true)
+          .AllowCredentials());
 
 app.UseHttpsRedirection();
 

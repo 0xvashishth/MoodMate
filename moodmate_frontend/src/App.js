@@ -5,15 +5,17 @@ import Chat from "./Pages/Chat";
 import { useState } from "react";
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 // require('dotenv').config()
-
+import toast, { Toaster } from 'react-hot-toast';
 
 function App() {
+  var toastId;
   const [connection, setConnection] = useState();
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
   
 
   const joinRoom = async (user, UserWant, UserIs) => {
+    toastId = toast.loading("Please wait 😉");
     try {
       const connection = new HubConnectionBuilder()
         .withUrl(process.env['REACT_APP_BASE_URL'])
@@ -33,7 +35,9 @@ function App() {
         setMessages([]);
         setUsers([]);
       });
-
+      toast.loading("Crunching your moodMate 😋", {
+        id: toastId,
+      });
       await connection.start();
       await connection.invoke("JoinRoom", {
         user,
@@ -43,8 +47,14 @@ function App() {
         UserWant,
         connectionId: "567232",
       });
+      toast.success("Room Is Created 😁", {
+        id: toastId,
+      });
       setConnection(connection);
     } catch (e) {
+      toast.error("Something Went Wrong 😣, Please Try Again!", {
+        id: toastId,
+      });
       console.log(e);
     }
   };
@@ -67,6 +77,7 @@ function App() {
 
   return (
     <div className="App">
+      <Toaster position="bottom-center" reverseOrder={false} />
       {!connection ? (
         <Profile joinRoom={joinRoom} />
       ) : (
