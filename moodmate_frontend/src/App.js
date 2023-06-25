@@ -5,7 +5,7 @@ import Chat from "./Pages/Chat";
 import { useState } from "react";
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 // require('dotenv').config()
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 
 function App() {
   var toastId;
@@ -76,7 +76,7 @@ function App() {
 
   return (
     <div className="App">
-      <Toaster position="bottom-center" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} />
       {!connection ? (
         <Profile joinRoom={joinRoom} />
       ) : (

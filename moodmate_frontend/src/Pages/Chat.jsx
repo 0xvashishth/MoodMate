@@ -1,5 +1,6 @@
 import ReceivingChat from "../Components/ReceivingChat";
 import SendingChat from "../Components/SendingChat";
+import MoodMate from "../Components/MoodMate";
 import { useState, useRef, useEffect } from "react";
 import { BiSend } from "react-icons/bi";
 
@@ -39,6 +40,8 @@ const Chat = ({ sendMessage, messages, users, closeConnection }) => {
                 sender={m.user}
                 msg={m.message}
               />
+            ) : "MoodMate" == m.user ? (
+              <MoodMate msg={m.message} />
             ) : (
               <ReceivingChat
                 key={index}
