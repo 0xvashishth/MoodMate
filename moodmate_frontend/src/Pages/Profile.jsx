@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { gifObj, moodVal } from "../utils/Dummy";
+import logo from "../utils/logo.png";
 import { useAppContext } from "../Context/appContext";
 
 import toast, { Toaster } from "react-hot-toast";
@@ -16,7 +17,7 @@ const Profile = ({ joinRoom }) => {
   return (
     <div className="bg-cyan-100 h-screen w-screen p-5 flex justify-around text-center flex-col">
       <div>
-        <h1 className="text-4xl">Mood Match</h1>
+        <img src={logo} className="m-auto h-20 w-auto" />
       </div>
       <div className="flex justify-center gap-11">
         <input
