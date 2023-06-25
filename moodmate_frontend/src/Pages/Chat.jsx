@@ -10,6 +10,7 @@ import { toast } from "react-hot-toast";
 
 const Chat = ({ sendMessage, messages, users, closeConnection }) => {
   const [message, setMessage] = useState("");
+  const [isGameOn, setIsGameOn] = useState(<div></div>);
   const scr = useRef(null);
   const inp = useRef(null);
   const {
@@ -27,6 +28,13 @@ const Chat = ({ sendMessage, messages, users, closeConnection }) => {
   }, [messages]);
   useEffect(() => {
     if (users?.length == 1) {
+      setIsGameOn(
+        <iframe
+          src="http://127.0.0.1:5500/src/utils/dyno.html"
+          title="Dyno App"
+          className="fixed bottom-28 w-screen noScroll h-60"
+        ></iframe>
+      );
       setToastIdUsers(toast.loading("Finding Your MoodMate 😉"));
     }
     if (users?.length == 2) {
@@ -36,6 +44,7 @@ const Chat = ({ sendMessage, messages, users, closeConnection }) => {
         }🤩`,
         { id: toastIdUsers }
       );
+      setIsGameOn(<div></div>);
     }
   }, [users]);
   const handleClick = (e) => {
@@ -58,6 +67,7 @@ const Chat = ({ sendMessage, messages, users, closeConnection }) => {
   return (
     <div className="relative h-screen">
       <div className="min-h-[70vh] w-full fixed bg-cyan-100 flex justify-around text-center flex-col ">
+        {isGameOn}
         <div className="leave-room text-lg bg-blue-400 text-white border-black rounded-lg h-10 w-20 top-2 right-3 md:right-10 absolute p-[0.35rem]">
           <button
             variant="danger"

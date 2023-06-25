@@ -74,7 +74,7 @@ const Profile = ({ joinRoom }) => {
         </button>
       </div>
       <div className="flex flex-col justify-center gap-8">
-        <p className="text-2xl md:text-3xl">
+        <p className="font-medium text-xl md:text-3xl">
           I'm {moodVal[gif]}, I wanna talk with {moodVal[mood]}
         </p>
         <div className="flex flex-wrap gap-5 justify-center">
