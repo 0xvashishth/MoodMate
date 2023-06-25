@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { gifObj, moodVal } from "../utils/Dummy";
+import { useAppContext } from "../Context/appContext";
 
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
@@ -8,7 +9,7 @@ const Profile = ({ joinRoom }) => {
   const [mood, setMood] = useState(0);
   const [user, setUser] = useState();
   const [room, setRoom] = useState();
-
+  const { setSenderMood, setYourMood, setYourName } = useAppContext();
   return (
     <div className="bg-cyan-100 h-screen w-screen p-5 flex justify-around text-center flex-col">
       <div>
@@ -26,9 +27,9 @@ const Profile = ({ joinRoom }) => {
             e.preventDefault();
             if (user != null) {
               console.log(user, moodVal[mood], moodVal[gif]);
-              localStorage.setItem("yourMood", gif);
-              localStorage.setItem("senderMood", mood);
-              localStorage.setItem("yourName", user);
+              setYourMood(gif);
+              setSenderMood(mood);
+              setYourName(user);
               joinRoom(user, moodVal[mood], moodVal[gif]);
             }
           }}

@@ -3,12 +3,20 @@ import SendingChat from "../Components/SendingChat";
 import MoodMate from "../Components/MoodMate";
 import { useState, useRef, useEffect } from "react";
 import { BiSend } from "react-icons/bi";
-
+import { useAppContext } from "../Context/appContext";
 import React from "react";
 
 const Chat = ({ sendMessage, messages, users, closeConnection }) => {
   const [message, setMessage] = useState("");
   const scr = useRef(null);
+  const {
+    yourMood,
+    yourName,
+    senderMood,
+    setSenderMood,
+    setYourMood,
+    setYourName,
+  } = useAppContext();
   useEffect(() => {
     scr.current.scrollIntoView();
   }, [messages]);
@@ -18,9 +26,9 @@ const Chat = ({ sendMessage, messages, users, closeConnection }) => {
         <button
           variant="danger"
           onClick={() => {
-            localStorage.removeItem("yourMood");
-            localStorage.removeItem("senderMood");
-            localStorage.removeItem("yourName");
+            setYourMood("");
+            setSenderMood("");
+            setYourName("");
             closeConnection();
           }}
         >
@@ -33,10 +41,10 @@ const Chat = ({ sendMessage, messages, users, closeConnection }) => {
       <div>
         <div className="h-[90vh] overflow-scroll my-5 pb-6 flex flex-col gap-1">
           {messages.map((m, index) =>
-            localStorage.getItem("yourName") == m.user ? (
+            yourName == m.user ? (
               <SendingChat
                 key={index}
-                gif={localStorage.getItem("yourMood")}
+                gif={yourMood}
                 sender={m.user}
                 msg={m.message}
               />
@@ -45,7 +53,7 @@ const Chat = ({ sendMessage, messages, users, closeConnection }) => {
             ) : (
               <ReceivingChat
                 key={index}
-                gif={localStorage.getItem("senderMood")}
+                gif={senderMood}
                 sender={m.user}
                 msg={m.message}
               />
