@@ -75,7 +75,7 @@ const Chat = ({ sendMessage, messages, users, closeConnection }) => {
               setMessage("");
             }}
           >
-            <BiSend className="m-auto block w-7 h-7" color="white" />
+          <BiSend className="m-auto block w-7 h-7" color="white" />
           </button>
         </div>
       </div>
