@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { gifObj, moodVal } from "../utils/Dummy";
-
+import toast, { Toaster } from "react-hot-toast";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const Profile = ({ joinRoom }) => {
@@ -8,7 +8,7 @@ const Profile = ({ joinRoom }) => {
   const [mood, setMood] = useState(0);
   const [user, setUser] = useState();
   const [room, setRoom] = useState();
-
+  var toastId;
   return (
     <div className="bg-cyan-100 h-screen w-screen p-5 flex justify-around text-center flex-col">
       <div>
@@ -30,6 +30,8 @@ const Profile = ({ joinRoom }) => {
               localStorage.setItem("senderMood", mood);
               localStorage.setItem("yourName", user);
               joinRoom(user, moodVal[mood], moodVal[gif]);
+            }else{
+              toastId = toast.error("Please Enter your nick name 😏");
             }
           }}
         >

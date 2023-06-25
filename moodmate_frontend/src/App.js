@@ -60,7 +60,11 @@ function App() {
 
   const sendMessage = async (message) => {
     try {
+      toastId = toast.loading("Sending Your Message..");
       await connection.invoke("SendMessage", message);
+      toast.success("Sent", {
+        id: toastId,
+      });
     } catch (e) {
       console.log(e);
     }
