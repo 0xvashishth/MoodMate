@@ -4,15 +4,17 @@ import Profile from "./Pages/Profile";
 import Chat from "./Pages/Chat";
 import { useState } from "react";
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
+// require('dotenv').config()
 
 function App() {
   const [connection, setConnection] = useState();
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
+
   const joinRoom = async (user, UserWant, UserIs) => {
     try {
       const connection = new HubConnectionBuilder()
-        .withUrl("https://localhost:7067/chat")
+        .withUrl(process.env["REACT_APP_BASE_URL"])
         .configureLogging(LogLevel.Information)
         .build();
 

@@ -10,11 +10,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSignalR();
+var configuration = new ConfigurationBuilder()
+    .SetBasePath(builder.Environment.ContentRootPath)
+    .AddJsonFile("appsettings.json")
+    .Build();
 builder.Services.AddSingleton<IDictionary<string, UserConnection>>(opts => new Dictionary<string, UserConnection>());
 builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
 {
     builder.AllowAnyMethod().AllowAnyHeader()
-    .WithOrigins("http://localhost:3000")
+    .WithOrigins(configuration["clientUrl"])
     .AllowCredentials();
 }));
 
