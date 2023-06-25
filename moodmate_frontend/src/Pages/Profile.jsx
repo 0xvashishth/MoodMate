@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { gifObj, moodVal } from "../utils/Dummy";
 import logo from "../utils/logo.png";
 import { useAppContext } from "../Context/appContext";
-
+import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
@@ -10,10 +10,22 @@ const Profile = ({ joinRoom }) => {
   const [gif, setGif] = useState(0);
   const [mood, setMood] = useState(0);
   const [user, setUser] = useState();
+  const [totalOnlineUsers, setTotalOnlineUsers] = useState("Updating..");
   const [isDisable, setIsDisable] = useState(false);
-  const { setSenderMood, setYourMood, setYourName, setIsEnable, isEnable } =
-    useAppContext();
+  const { setSenderMood, setYourMood, setYourName, setIsEnable, isEnable } = useAppContext();
   var toastId;
+
+  useEffect(()=>{
+    var url = process.env["REACT_APP_BASE_URL"];
+    url = url.replace("/chat", "/api/MoodMate/");
+    console.log(url)
+    async function getAllUserCount(){
+      await axios.get(url).then((data)=>{
+        setTotalOnlineUsers(data.data)
+      })
+    }
+    getAllUserCount();
+  }, [])
   const handleClick = (e) => {
     e.preventDefault();
     if (isEnable) {
@@ -39,6 +51,9 @@ const Profile = ({ joinRoom }) => {
     <div className="-mt-4 min-h-screen p-5 flex justify-center text-center flex-col gap-14 md:gap-16">
       <div>
         <img src={logo} className="m-auto h-20 w-auto" />
+      </div>
+      <div>
+        Online Users: {totalOnlineUsers}
       </div>
       <div className="flex justify-center gap-11">
         <input
