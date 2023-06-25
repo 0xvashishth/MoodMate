@@ -57,7 +57,7 @@ const Profile = ({ joinRoom }) => {
       <div className="flex justify-center text-center">
         <button
           onClick={() => {
-            setGif((prev) => (prev + 8) % 9);
+            setGif((prev) => (prev + 2) % 3);
           }}
           className="block m-auto mr-0"
         >
@@ -66,7 +66,7 @@ const Profile = ({ joinRoom }) => {
         <img className="m-auto w-40 h-40 md:w-44 md:h-auto" src={gifObj[gif]} />
         <button
           onClick={() => {
-            setGif((prev) => (prev + 1) % 9);
+            setGif((prev) => (prev + 1) % 3);
           }}
           className="block m-auto ml-0"
         >
