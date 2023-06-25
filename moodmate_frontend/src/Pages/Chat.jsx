@@ -8,7 +8,13 @@ import React from "react";
 import logo from "../utils/logo.png";
 import { toast } from "react-hot-toast";
 
-const Chat = ({ sendMessage, messages, users, closeConnection, FindConnection }) => {
+const Chat = ({
+  sendMessage,
+  messages,
+  users,
+  closeConnection,
+  FindConnection,
+}) => {
   const [message, setMessage] = useState("");
   const [isGameOn, setIsGameOn] = useState(<div></div>);
   const scr = useRef(null);
@@ -36,7 +42,7 @@ const Chat = ({ sendMessage, messages, users, closeConnection, FindConnection })
         ></iframe>
       );
       setToastIdUsers(toast.loading("Finding Your MoodMate 😉"));
-      FindConnection()
+      FindConnection();
     }
     if (users?.length == 2) {
       toast.success(
