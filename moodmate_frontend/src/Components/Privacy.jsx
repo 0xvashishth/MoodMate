@@ -43,7 +43,8 @@ const Privacy = ({ gif, sender, msg }) => {
                   </h3>
                   <div class="mt-2">
                     <p class="text-sm text-gray-500 h-48 overflow-scroll">
-                      MoodMate Chat - Usage Policy Welcome to MoodMate, an
+                      MoodMate Chat - Usage Policy 
+                      Welcome to MoodMate, an
                       anonymous chat platform where users can communicate based
                       on their mood. Before using MoodMate, please carefully
                       read and understand the following usage policy. By
