@@ -30,7 +30,7 @@ const Chat = ({ sendMessage, messages, users, closeConnection }) => {
     if (users?.length == 1) {
       setIsGameOn(
         <iframe
-          src="http://127.0.0.1:5500/src/utils/dyno.html"
+          src="https://vashisht.co/dyno/"
           title="Dyno App"
           className="fixed bottom-28 w-screen noScroll h-60"
         ></iframe>
