@@ -14,6 +14,27 @@ const Profile = ({ joinRoom }) => {
   const { setSenderMood, setYourMood, setYourName, setIsEnable, isEnable } =
     useAppContext();
   var toastId;
+  const handleClick = (e) => {
+    e.preventDefault();
+    if (isEnable) {
+      setIsEnable(false);
+      if (user != null) {
+        console.log(user, moodVal[mood], moodVal[gif]);
+        setYourMood(gif);
+        setSenderMood(mood);
+        setYourName(user);
+        joinRoom(user, moodVal[mood], moodVal[gif]);
+      } else {
+        toastId = toast.error("Please Enter your nick name 😏");
+      }
+    }
+  };
+  const handleKeypress = (e) => {
+    console.log(1);
+    if (e.keyCode == 13) {
+      handleClick(e);
+    }
+  };
   return (
     <div className="-mt-4 min-h-screen p-5 flex justify-center text-center flex-col gap-14 md:gap-16">
       <div>
@@ -24,24 +45,11 @@ const Profile = ({ joinRoom }) => {
           className="lg:w-1/4 w-2/3 rounded-lg outline-none h-10 p-4"
           placeholder="Enter Your Nickname"
           onChange={(e) => setUser(e.target.value)}
+          onKeyUp={handleKeypress}
         />
         <button
           className={`text-lg bg-blue-400 text-white border-black p-1 rounded-lg h-10 w-20`}
-          onClick={(e) => {
-            e.preventDefault();
-            if (isEnable) {
-              setIsEnable(false);
-              if (user != null) {
-                console.log(user, moodVal[mood], moodVal[gif]);
-                setYourMood(gif);
-                setSenderMood(mood);
-                setYourName(user);
-                joinRoom(user, moodVal[mood], moodVal[gif]);
-              } else {
-                toastId = toast.error("Please Enter your nick name 😏");
-              }
-            }
-          }}
+          onClick={handleClick}
         >
           Enter
         </button>

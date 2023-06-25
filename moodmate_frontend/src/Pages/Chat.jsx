@@ -38,6 +38,20 @@ const Chat = ({ sendMessage, messages, users, closeConnection }) => {
       );
     }
   }, [users]);
+  const handleClick = (e) => {
+    e.preventDefault();
+    if (message.length) {
+      sendMessage(message);
+      inp.current.focus();
+    }
+    setMessage("");
+  };
+  const handleKeypress = (e) => {
+    console.log(1);
+    if (e.keyCode == 13) {
+      handleClick(e);
+    }
+  };
   useEffect(() => {
     inp.current.focus();
   }, []);
@@ -97,17 +111,11 @@ const Chat = ({ sendMessage, messages, users, closeConnection }) => {
               placeholder="Message..."
               value={message}
               ref={inp}
+              onKeyUp={handleKeypress}
             />
             <button
               className="bg-blue-400 rounded-full h-12 w-12"
-              onClick={(e) => {
-                e.preventDefault();
-                if (message.length) {
-                  sendMessage(message);
-                  inp.current.focus();
-                }
-                setMessage("");
-              }}
+              onClick={handleClick}
             >
               <BiSend className="m-auto block w-7 h-7" color="white" />
             </button>
