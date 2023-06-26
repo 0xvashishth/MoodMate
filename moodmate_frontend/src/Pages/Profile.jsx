@@ -12,20 +12,21 @@ const Profile = ({ joinRoom }) => {
   const [user, setUser] = useState();
   const [totalOnlineUsers, setTotalOnlineUsers] = useState("Updating..");
   const [isDisable, setIsDisable] = useState(false);
-  const { setSenderMood, setYourMood, setYourName, setIsEnable, isEnable } = useAppContext();
+  const { setSenderMood, setYourMood, setYourName, setIsEnable, isEnable } =
+    useAppContext();
   var toastId;
 
-  useEffect(()=>{
+  useEffect(() => {
     var url = process.env["REACT_APP_BASE_URL"];
     url = url.replace("/chat", "/api/MoodMate/");
-    console.log(url)
-    async function getAllUserCount(){
-      await axios.get(url).then((data)=>{
-        setTotalOnlineUsers(data.data)
-      })
+    console.log(url);
+    async function getAllUserCount() {
+      await axios.get(url).then((data) => {
+        setTotalOnlineUsers(data.data);
+      });
     }
     getAllUserCount();
-  }, [])
+  }, []);
   const handleClick = (e) => {
     e.preventDefault();
     if (isEnable) {
@@ -52,9 +53,9 @@ const Profile = ({ joinRoom }) => {
       <div>
         <img src={logo} className="m-auto h-20 w-auto" />
       </div>
-      <div>
+      {/* <div>
         Online Users: {totalOnlineUsers}
-      </div>
+      </div> */}
       <div className="flex justify-center gap-11">
         <input
           className="lg:w-1/4 w-2/3 rounded-lg outline-none h-10 p-4"
