@@ -53,9 +53,9 @@ const Profile = ({ joinRoom }) => {
       <div>
         <img src={logo} className="m-auto h-20 w-auto" />
       </div>
-      {/* <div>
+      <div>
         Online Users: {totalOnlineUsers}
-      </div> */}
+      </div>
       <div className="flex justify-center gap-11">
         <input
           className="lg:w-1/4 w-2/3 rounded-lg outline-none h-10 p-4"
